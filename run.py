@@ -92,3 +92,46 @@ class PennyProvisions:
             choice = input("Enter 'cancel' to return to the main menu: ")
             if choice.lower() == 'cancel':
                 return None
+    
+  def account_creation(self):
+    """
+    Set up a new user account by creating a username and password.
+    Once the account is created, the user will need to log in using the details provided.
+    """
+    username = input("Create a username: ")
+    password = getpass.getpass("Create a password: ")
+
+    if username in self.user_data:
+        print("Username already exists. Please choose a different one.")
+        return
+
+    # Prompt for currency selection
+    print("\nSelect your preferred currency:")
+    for key, value in self.CURRENCY_OPTIONS.items():
+        print(f"{key}. {value}")
+
+    selected_currency = None
+    while not selected_currency:
+        currency_choice = input("Enter the number corresponding to your preferred currency: ")
+
+        if currency_choice in self.CURRENCY_OPTIONS:
+            selected_currency = self.CURRENCY_OPTIONS[currency_choice]
+            self.selected_currency = selected_currency  # Store the selected currency
+        else:
+            print("Invalid choice. Please enter a valid number from the options.")
+
+    # Initialize incomes and expenditures lists in JSON
+    self.user_data[username] = {
+        "password": password,
+        "savings_target": 0,
+        "current_savings": 0,
+        "expenses": [],
+        "incomes": [],
+        "expenditures": [],
+        "currency": selected_currency,
+        "debts": [],
+        "savings_goals": {}
+    }
+
+    self.save_user_data()
+    print("Account successfully created!")  

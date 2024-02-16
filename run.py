@@ -168,6 +168,49 @@ class PennyProvisions:
         except ValueError as e:
             print(f"Error: {e}. Please enter a valid positive number.")
 
+  INCOME_OPTIONS = {
+      '1': 'Employment',
+      '2': 'Self-employment',
+      '3': 'Benefits',
+      '4': 'Grants/support payments',
+      '5': 'Pension',
+      '6': 'Rental income',
+      '7': 'Employment benefits',
+      '8': 'Interest on savings',
+      '9': 'Trust distributions',
+      '10': 'Insurance payouts',
+      '11': 'Capital gains',
+      '12': 'Child maintenance',
+      '13': 'Bonus/Commission',
+      '14': 'Royalties',
+      '15': 'Gifts',
+      '16': 'Dividends',
+      '17': 'Other',
+  }
+
+  EXPENDITURE_OPTIONS = {
+      '1': 'Rent payments',
+      '2': 'Mortgage payments',
+      '3': 'Insurance premiums',
+      '4': 'Loan repayments',
+      '5': 'Debt',
+      '6': 'Food',
+      '7': 'Utilities',
+      '8': 'Transport',
+      '9': 'Entertainment',
+      '10': 'Travel/vacation',
+      '11': 'Non-essentials',
+      '12': 'Toiletries',
+      '13': 'Dining out',
+      '14': 'Bills',
+      '15': 'Housing cost',
+      '16': 'Clothing',
+      '17': 'Capital',
+      '18': 'Operational costs',
+      '19': 'Tax',
+      '20': 'Other'
+  }  
+
   def main(self):
     """
     Main function to run Penny Provisions program.

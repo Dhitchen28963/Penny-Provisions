@@ -73,4 +73,22 @@ class PennyProvisions:
       with open(self.user_data_file, 'w') as file:
           json.dump(data_to_save, file, indent=4, cls=DateEncoder)
 
-  
+  def authenticate_user(self):
+    """
+    Authenticates the user's inputted username and password.
+    """
+    if not self.user_data:
+        print("No user credentials found. Please set up an account first.")
+        return None
+
+    while True:
+        username = input("Enter your username: ")
+        password = getpass.getpass("Enter your password: ")
+
+        if username in self.user_data and self.user_data[username]["password"] == password:
+            return username
+        else:
+            print("Invalid credentials. Please try again or enter 'cancel' to go back to the main menu.")
+            choice = input("Enter 'cancel' to return to the main menu: ")
+            if choice.lower() == 'cancel':
+                return None

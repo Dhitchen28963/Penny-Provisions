@@ -41,3 +41,25 @@ class PennyProvisions:
       self.user_data_file = "user_data.json"
       self.load_user_data()
       self.selected_currency = None  # Saves the users selected currency
+
+  def load_user_data(self):
+      """
+      Load user data from the JSON file.
+      """
+      try:
+          with open(self.user_data_file, 'r') as file:
+              file_content = file.read()
+              if not file_content.strip():
+                  # File is empty
+                  self.user_data = {}
+                  return
+
+              data = json.loads(file_content)
+              # Convert target_date strings back to datetime.date objects
+              for _username, user_info in data.items():
+                  if "target_date" in user_info and isinstance(user_info["target_date"], str):
+                      user_info["target_date"] = datetime.strptime(user_info["target_date"], "%Y-%m-%d").date()
+
+              self.user_data = data
+      except FileNotFoundError:
+          self.user_data = {}  

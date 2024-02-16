@@ -62,4 +62,15 @@ class PennyProvisions:
 
               self.user_data = data
       except FileNotFoundError:
-          self.user_data = {}  
+          self.user_data = {}
+
+  def save_user_data(self):
+      """
+      Save user data to the JSON file
+      """
+      data_to_save = self.user_data.copy()
+
+      with open(self.user_data_file, 'w') as file:
+          json.dump(data_to_save, file, indent=4, cls=DateEncoder)
+
+  

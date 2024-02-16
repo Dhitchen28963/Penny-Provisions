@@ -154,6 +154,20 @@ class PennyProvisions:
         current_savings = goal_info["current_savings"]
         print(f"{goal_name}: {user_currency[0]}{current_savings:.2f}")
 
+  def get_valid_amount(self, prompt):
+    """
+    Ensures that the amount inputted by the user is a positive amount.
+    In the event a negative amount is inputted, the user is prompted to input a valid amount.
+    """
+    while True:
+        try:
+            amount = float(input(prompt))
+            if amount < 0:
+                raise ValueError("Amount cannot be negative.")
+            return amount
+        except ValueError as e:
+            print(f"Error: {e}. Please enter a valid positive number.")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

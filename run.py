@@ -136,6 +136,24 @@ class PennyProvisions:
     self.save_user_data()
     print("Account successfully created!")
 
+  def view_current_savings(self, username):
+    """
+    Display the current savings for each savings goal.
+    """
+    user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
+
+    savings_goals = self.user_data[username].get("savings_goals", {})
+
+    if not savings_goals:
+        print("No savings goals found. Please create a savings goal.")
+        return
+
+    user_currency_symbol = user_currency[1]  # Get the currency symbol
+    print(f"\nCurrent Savings ({user_currency_symbol}):")
+    for goal_name, goal_info in savings_goals.items():
+        current_savings = goal_info["current_savings"]
+        print(f"{goal_name}: {user_currency[0]}{current_savings:.2f}")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

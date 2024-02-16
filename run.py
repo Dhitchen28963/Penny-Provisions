@@ -134,4 +134,101 @@ class PennyProvisions:
     }
 
     self.save_user_data()
-    print("Account successfully created!")  
+    print("Account successfully created!")
+
+  def main(self):
+    """
+    Main function to run Penny Provisions program.
+    """
+    print("Welcome to Penny Provision!")
+
+    while True:
+        print("\nMain Menu:")
+        print("1. Log In")
+        print("2. Set Up Account")
+        print("3. Exit")
+
+        choice = input("Enter your choice (1-3): ")
+
+        if choice.lower() == 'cancel':
+            print("Operation canceled.")
+            break
+
+        if choice == "1":
+            username = self.authenticate_user()
+            if username:
+                selected_goal = None  # Store the selected savings goal
+
+                print(f"Logged in as {username}.")
+                while True:
+                    print("\nPenny Provisions Menu:")
+                    print("1. Add Savings Goal")
+                    print("2. Select Savings Goal")
+                    print("3. Record Income")
+                    print("4. Record Expenditure")
+                    print("5. View Recommendations")
+                    print("6. View Current Savings")
+                    print("7. Manage Debts")  # Added option
+                    print("8. View All Savings Goals")
+                    print("9. Analyze Monthly Activity")
+                    print("10. Log Out")
+
+                    option = input("Enter your choice (1-10): ")
+
+                    if option.lower() == 'cancel':
+                        print("Operation canceled.")
+                        break
+
+                    if option == "1":
+                        self.add_savings_goal(username)
+                    elif option == "2":
+                        selected_goal = self.select_savings_goal(username)
+                        if selected_goal:
+                            print(f"Savings goal '{selected_goal}' selected.")
+                    elif option == "3":
+                        if selected_goal:
+                            self.record_income(username, selected_goal)
+                        else:
+                            print("Please select a savings goal first.")
+                    elif option == "4":
+                        if selected_goal:
+                            self.record_expenditure(username)
+                        else:
+                            print("Please select a savings goal first.")
+                    elif option == "5":
+                        if selected_goal:
+                            self.calculate_recommendation(username, selected_goal)
+                        else:
+                            print("Please select a savings goal first.")
+                    elif option == "6":
+                        self.view_current_savings(username)
+                    elif option == "7":
+                        self.manage_debts(username)  # Added method call
+                    elif option == "8":
+                        self.view_all_savings_goals(username)
+                    elif option == "9":
+                        self.analyze_monthly_activity(username)
+                    elif option == "10":
+                        confirm_logout = input("Are you sure you want to log out? (yes/no): ")
+                        if confirm_logout.lower() == 'yes':
+                            break
+                        elif confirm_logout.lower() == 'no':
+                            continue
+                        else:
+                            print("Invalid choice. Please enter 'yes' or 'no'.")
+                    else:
+                        print("Invalid choice. Please enter a number between 1 and 10.")
+
+        elif choice == "2":
+            self.account_creation()
+
+        elif choice == "3":
+            print("Exiting Penny Provisions. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter a number between 1 and 3.")
+
+if __name__ == "__main__":
+    penny_provisions = PennyProvisions()
+    penny_provisions.main()  

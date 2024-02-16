@@ -33,3 +33,11 @@ class PennyProvisions:
     '15': ('PEN', 'Peruvian Sol'),
     '16': ('ILS', 'Israeli New Shekel'),
   }
+
+  def __init__(self):
+      """
+      Initialize Penny Provisions budgeting tool
+      """
+      self.user_data_file = "user_data.json"
+      self.load_user_data()
+      self.selected_currency = None  # Saves the users selected currency

@@ -239,6 +239,38 @@ class PennyProvisions:
     self.save_user_data()
     print(f"Savings goal '{goal_name}' added successfully!")
 
+  def select_savings_goal(self, username):
+    """
+    Allows the user to select a savings goal.
+    """
+    user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
+    savings_goals = self.user_data[username].get("savings_goals", {})
+
+    if not savings_goals:
+        print("No savings goals found.")
+        return None
+
+    print("Select a savings goal:")
+    for i, (goal_name, goal_info) in enumerate(savings_goals.items(), start=1):
+        print(f"{i}. {goal_name} - Target Amount: {user_currency[0]}{goal_info['target_amount']:.2f}")
+
+    choice = input("Enter the number corresponding to the savings goal (or type 'cancel' to go back): ")
+
+    if choice.lower() == 'cancel':
+        return None
+
+    try:
+        choice_index = int(choice)
+        if 1 <= choice_index <= len(savings_goals):
+            selected_goal = list(savings_goals.keys())[choice_index - 1]
+            return selected_goal
+        else:
+            print("Invalid choice. Please enter a number within the given range.")
+            return None
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
+        return None
+
   def record_income(self, username, selected_goal):
     """
     Records inputted income data for the user, ensuring a valid amount is entered.

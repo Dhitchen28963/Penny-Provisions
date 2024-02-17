@@ -526,6 +526,51 @@ class PennyProvisions:
 
     print("\nEnd of Debts List.")
 
+  def add_repayment_to_debt(self, username):
+    """
+    Records an repayment towards a specific debt.
+    """
+    while True:
+        print("\nSelect a debt to add an expenditure:")
+        debts = self.user_data[username].get("debts", [])
+        if not debts:
+          print("No debts found. Please add a debt first.")
+          return
+
+        for i, debt in enumerate(debts, start=1):
+            print(f"{i}. {debt['name']} - Type: {debt['type']} - Remaining Term: {debt['term']} months")
+
+        choice = input("Enter the number corresponding to the debt (or type 'cancel' to go back): ")
+
+        if choice.lower() == 'cancel':
+            return
+
+        try:
+            choice_index = int(choice)
+            if 1 <= choice_index <= len(debts):
+                selected_debt = debts[choice_index - 1]
+                debt_name = selected_debt['name']
+                expenditure_amount = self.get_valid_amount(f"Enter the amount for the expenditure on {debt_name}: ")
+
+                # Record the expenditure details including the date
+                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD): ")
+                expenditure_date = datetime.strptime(expenditure_date_str, "%Y-%m-%d").date()
+
+                # Add a date validation check
+                if expenditure_date > datetime.now().date():
+                    print("Error: Cannot record expenditure for a future date.")
+                    continue
+
+                # Update the debt details with the expenditure
+                selected_debt["payments"].append({"amount": expenditure_amount, "date": expenditure_date})
+
+                self.save_user_data()
+                print(f"Expenditure recorded successfully! Remaining debt on {debt_name}: £{self.calculate_remaining_balance(selected_debt):.2f}")
+            else:
+                print("Invalid choice. Please enter a number within the given range.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

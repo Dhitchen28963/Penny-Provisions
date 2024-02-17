@@ -475,6 +475,56 @@ class PennyProvisions:
 
       print("\nEnd of Savings Goals List.")
 
+  def analyze_monthly_activity(self, username):
+    """
+    Analyze monthly activity to find the month with the most expenses and savings.
+    """
+    incomes = self.user_data[username].get("incomes", [])
+    expenditures = self.user_data[username].get("expenditures", [])
+
+    # Combine incomes and expenditures
+    all_activities = incomes + expenditures
+
+    # Create a dictionary to store monthly totals
+    monthly_totals = {}
+
+    for activity in all_activities:
+        # Extract the month and year from the date
+        if isinstance(activity["date"], date):
+            month_year = activity["date"].strftime("%Y-%m")
+        elif isinstance(activity["date"], str):
+            month_year = datetime.strptime(activity["date"], "%Y-%m-%d").strftime("%Y-%m")
+        else:
+            continue  # Skip this activity if date format is not recognized
+
+        # Initialize or update the monthly total
+        if month_year not in monthly_totals:
+            monthly_totals[month_year] = {"income": 0, "expenditure": 0}
+
+        if activity in incomes:
+            monthly_totals[month_year]["income"] += activity["amount"]
+        else:
+            monthly_totals[month_year]["expenditure"] += activity["amount"]
+
+    if not monthly_totals:
+        print("No monthly activity found.")
+        return
+
+    # Find the month with the highest income and expenditure
+    max_income_month = max(monthly_totals, key=lambda x: monthly_totals[x]["income"], default=None)
+    max_expenditure_month = max(monthly_totals, key=lambda x: monthly_totals[x]["expenditure"], default=None)
+
+    print("\nMonthly Activity Analysis:")
+    if max_income_month:
+        print(f"Month with the highest income: {max_income_month} - £{monthly_totals[max_income_month]['income']:.2f}")
+    else:
+        print("No income recorded.")
+
+    if max_expenditure_month:
+        print(f"Month with the highest expenditure: {max_expenditure_month} - £{monthly_totals[max_expenditure_month]['expenditure']:.2f}")
+    else:
+        print("No expenditure recorded.")
+
   def manage_debts(self, username):
     """
     Manage Debts Menu.

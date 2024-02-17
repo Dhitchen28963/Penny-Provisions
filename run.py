@@ -571,6 +571,18 @@ class PennyProvisions:
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
+  def calculate_total_debt(self, username):
+    """
+    Calculate the total debt for user.
+    """
+    total_debt = 0
+    debts = self.user_data.get(username, {}).get("debts", [])
+
+    for debt in debts:
+      total_debt += debt.get("amount", 0)
+
+      return total_debt
+
   def main(self):
     """
     Main function to run Penny Provisions program.

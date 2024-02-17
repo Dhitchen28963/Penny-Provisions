@@ -166,7 +166,20 @@ Below is a table showing various actions performed on the website including the 
 | Display prompts                          | Prompts are displayed to ensure user friendly navigation           |  Pass  |
 
 ## Bugs
-Upon selecting the "Add Expense" and selected Debt in the expense options I was prompted to select one of the debts from my manage debts menu. To resolve this I added a separate function to allow users to add a non priority debt to a savings goal and for priority debts then can use the manage debts menu which contains additional options such as term (in months) and an interest rate.
+* Upon selecting the "Add Expense" and selected Debt in the expense options I was prompted to select one of the debts from my manage debts menu. To resolve this I added a separate function to allow users to add a non priority debt to a savings goal and for priority debts then can use the manage debts menu which contains additional options such as term (in months) and an interest rate.
+
+* Upon testing my program I established that I could add a past dated savings goal. I resolved this by adding the following code:
+
+try:
+        target_date = datetime.strptime(target_date_str, "%Y-%m-%d").date()
+    except ValueError:
+        print("Invalid date format. Please use YYYY-MM-DD format.")
+        return
+
+    # Check if the target date is in the past
+    if target_date < datetime.now().date():
+        print("Target date cannot be in the past.")
+        return
 
 ## Unfixed Bugs
 No unfixed bugs.

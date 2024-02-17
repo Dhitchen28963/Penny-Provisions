@@ -224,7 +224,17 @@ class PennyProvisions:
 
     target_amount = float(input("Enter your savings target amount:\n"))
     target_date_str = input("Enter the date you wish to save the required money by (YYYY-MM-DD):\n")
-    target_date = datetime.strptime(target_date_str, "%Y-%m-%d").date()
+    
+    try:
+        target_date = datetime.strptime(target_date_str, "%Y-%m-%d").date()
+    except ValueError:
+        print("Invalid date format. Please use YYYY-MM-DD format.")
+        return
+
+    # Check if the target date is in the past
+    if target_date < datetime.now().date():
+        print("Target date cannot be in the past.")
+        return
 
     # Check if the key is present in the user_data, if not, create it
     if "savings_goals" not in self.user_data[username]:

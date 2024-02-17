@@ -1,6 +1,6 @@
 # Penny Provisions
 ---
-## Live link to website
+## Live link to program
 
 [Penny Provisions](https://penny-provisions-777f1206dc49.herokuapp.com/)
 
@@ -183,10 +183,9 @@ The site was deployed to Heroku pages. The steps to deploy are as follows:
 * Enabled automatic deploys and then clicked "Deploy Branch".
 * Upon completion of the build and display message of "Your app was successfully deployed" I then clicked View.
 
-
 The link can be found here - [Penny Provisions](https://penny-provisions-777f1206dc49.herokuapp.com/)
 
 ## Credits
 
 **Content**
-* Some of the code relating to user log in was derived from
+* The code relating to user login and user account creation was derived from Youtube videos from Digital Fox, Stack Overflow and Chat.openai.com for suggestions.

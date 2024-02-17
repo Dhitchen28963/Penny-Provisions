@@ -69,7 +69,7 @@ class PennyProvisions:
       Save user data to the JSON file
       """
       data_to_save = self.user_data.copy()
-
+      # Write mode to create a user if they do not currently exist
       with open(self.user_data_file, 'w') as file:
           json.dump(data_to_save, file, indent=4, cls=DateEncoder)
 
@@ -753,7 +753,7 @@ class PennyProvisions:
                     elif option == "6":
                         self.view_current_savings(username)
                     elif option == "7":
-                        self.manage_debts(username)  # Added method call
+                        self.manage_debts(username)
                     elif option == "8":
                         self.view_all_savings_goals(username)
                     elif option == "9":

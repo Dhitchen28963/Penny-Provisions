@@ -211,6 +211,34 @@ class PennyProvisions:
       '20': 'Other'
   }
 
+  def add_savings_goal(self, username):
+    """
+    Adds a new savings goal for the user.
+    """
+    print("Enter 'cancel' to cancel.")
+    goal_name = input("Enter the name of your savings goal: ")
+
+    if goal_name.lower() == 'cancel':
+        print("Savings goal creation canceled.")
+        return
+
+    target_amount = float(input("Enter your savings target amount: "))
+    target_date_str = input("Enter the date you wish to save the required money by (YYYY-MM-DD): ")
+    target_date = datetime.strptime(target_date_str, "%Y-%m-%d").date()
+
+    # Check if the key is present in the user_data, if not, create it
+    if "savings_goals" not in self.user_data[username]:
+        self.user_data[username]["savings_goals"] = {}
+
+    self.user_data[username]["savings_goals"][goal_name] = {
+        "target_amount": target_amount,
+        "target_date": target_date,
+        "current_savings": 0,
+        "expenses": []
+    }
+    self.save_user_data()
+    print(f"Savings goal '{goal_name}' added successfully!")
+
   def record_income(self, username, selected_goal):
     """
     Records inputted income data for the user, ensuring a valid amount is entered.

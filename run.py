@@ -402,6 +402,34 @@ class PennyProvisions:
         print(f" - Monthly: Save {user_currency[0]}{max(monthly_recommendation, 0):.2f} per month.")
         print(f" - Annually: Save {user_currency[0]}{max(annually_recommendation, 0):.2f} per year.")
 
+  def view_all_savings_goals(self, username):
+      """
+      Display all savings goals along with their details.
+      """
+      user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
+      savings_goals = self.user_data[username].get("savings_goals", {})
+
+      if not savings_goals:
+          print("No savings goals found.")
+          return
+
+      user_currency_symbol = user_currency[1]  # Get the currency symbol
+      print(f"\nAll Savings Goals ({user_currency_symbol}):")
+      for goal_name, goal_info in savings_goals.items():
+          print(f"\nGoal: {goal_name}")
+          print(f"  Target Amount: {user_currency[0]}{goal_info['target_amount']:.2f}")
+          print(f"  Target Date: {goal_info.get('target_date', 'N/A')}")
+          print(f"  Current Savings: {user_currency[0]}{goal_info['current_savings']:.2f}")
+
+          # Display expenses associated with the goal
+          expenses = goal_info.get('expenses', [])
+          if expenses:
+              print("  Expenses:")
+              for expense in expenses:
+                  print(f"    - {expense['type']}: {user_currency[0]}{expense['amount']:.2f} on {expense['date']}")
+
+      print("\nEnd of Savings Goals List.")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

@@ -494,6 +494,38 @@ class PennyProvisions:
         except ValueError as e:
             print(f"Error: {e}. Please enter valid information.")
 
+  def view_all_debts(self, username):
+    """
+    Display all debts along with their details.
+    """
+    debts = self.user_data.get(username, {}).get("debts", [])
+
+    if not debts:
+        print("No debts found.")
+        return
+
+    print("\nAll Debts:")
+    for debt in debts:
+        print(f"\nName: {debt.get('name', 'N/A')}")
+
+        # Calculate and print amount paid
+        amount_paid = sum(payment["amount"] for payment in debt.get("payments", []))
+        print(f"Amount Paid: £{amount_paid:.2f}")
+
+        # Calculate and print remaining balance
+        remaining_balance = self.calculate_remaining_balance(debt)
+        print(f"Remaining Balance: £{remaining_balance:.2f}")
+
+        # Display individual payments and their details
+        if debt.get("payments"):
+            print("Payments:")
+            for payment in debt["payments"]:
+                print(f"  - Amount: £{payment['amount']:.2f} - Date: {payment['date']}")
+
+        print("------")
+
+    print("\nEnd of Debts List.")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

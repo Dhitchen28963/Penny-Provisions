@@ -148,7 +148,7 @@ class PennyProvisions:
         print("No savings goals found. Please create a savings goal.")
         return
 
-    user_currency_symbol = user_currency[1]  # Get the currency symbol
+    user_currency_symbol = user_currency[1]  # Get the currency type
     print(f"\nCurrent Savings ({user_currency_symbol}):")
     for goal_name, goal_info in savings_goals.items():
         current_savings = goal_info["current_savings"]
@@ -537,7 +537,7 @@ class PennyProvisions:
         print(f"\nManage Debts Menu ({user_currency_symbol}):")
         print("1. Add Debt")
         print("2. View Debts")
-        print("3. Add Expense To Debt")
+        print("3. Add Payment To Debt")
         print("4. Go Back")
 
         option = input("Enter your choice (1-4):\n")
@@ -718,7 +718,7 @@ class PennyProvisions:
                     print("4. Record Expense")
                     print("5. View Recommendations")
                     print("6. View Current Savings")
-                    print("7. Manage Debts")  # Added option
+                    print("7. Manage Debts")
                     print("8. View All Savings Goals")
                     print("9. Analyze Monthly Activity")
                     print("10. Log Out")

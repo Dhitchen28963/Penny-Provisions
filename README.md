@@ -8,7 +8,7 @@
 <ol>
 <li>User Experience
     <ul>
-        <li>Process Flow Chart<li>
+        <li>Process Flow Chart</li>
         <li>Strategy Plane</li>
         <li>Scope Plane</li>
         <li>Structure & Skeleton Plane</li>

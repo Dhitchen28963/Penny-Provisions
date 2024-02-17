@@ -170,18 +170,18 @@ Below is a table showing various actions performed on the website including the 
 **PYTHON**
 
 ## Deployment
-* The site was deployed to Heroku pages. The steps to deploy are as follows:
-    *Created a new app via Heroku and click creat new app.
-    *Added App name and selected region and clicked create app.
-    *On the app dashboard I then clicked "Settings".
-    *No API's were added so config vars were not added.
-    *Added Buildpacks by click "Add build pack".
-    *Added the python buildpack first followed by the nodejs buildpack ensuring they were in the correct order.
-    *Once project settings were configured I then navigated to the "Deploy" section.
-    *Selected GitHub as the deployment method.
-    *Searched for Penny-Provisions and clicked connect.
-    *Enabled automatic deploys and then clicked "Deploy Branch".
-    *Upon completion of the build and display message of "Your app was successfully deployed" I then clicked View.
+The site was deployed to Heroku pages. The steps to deploy are as follows:
+* Created a new app via Heroku and click creat new app.
+* Added App name and selected region and clicked create app.
+* On the app dashboard I then clicked "Settings".
+* No API's were added so config vars were not added.
+* Added Buildpacks by click "Add build pack".
+* Added the python buildpack first followed by the nodejs buildpack ensuring they were in the correct order.
+* Once project settings were configured I then navigated to the "Deploy" section.
+* Selected GitHub as the deployment method.
+* Searched for Penny-Provisions and clicked connect.
+* Enabled automatic deploys and then clicked "Deploy Branch".
+* Upon completion of the build and display message of "Your app was successfully deployed" I then clicked View.
 
 
 The link can be found here - [Penny Provisions](https://penny-provisions-777f1206dc49.herokuapp.com/)

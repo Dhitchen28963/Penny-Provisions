@@ -88,7 +88,7 @@ class PennyProvisions:
         if username in self.user_data and self.user_data[username]["password"] == password:
             return username
         else:
-            print("Invalid credentials. Please try again or enter 'cancel' to go back to the main menu.")
+            print("Invalid credentials. Hit enter to try again or enter 'cancel' to go back to the main menu.")
             choice = input("Enter 'cancel' to return to the main menu: ")
             if choice.lower() == 'cancel':
                 return None
@@ -365,6 +365,44 @@ class PennyProvisions:
                 print(f"Error: {e}. Please enter a valid positive number.")
         else:
             print("Invalid choice. Please enter a valid number from the options.")
+
+  def add_debt_expenditure_to_savingsgoal(self, username):
+    """
+    Records inputted debt data for the user, ensuring a valid amount is entered.
+    Records expenditure to savings goal.
+    This could be a debt that is not added to the manage debts.
+    Updates debt details based on inputs.
+    """
+    while True:
+        print("Enter 'done' when finished.")
+        debt_type = input("Enter the type of debt: ")
+        if debt_type.lower() == 'done':
+            break
+
+        try:
+            debt_amount = self.get_valid_amount(f"Enter the amount for {debt_type}: ")
+            debt_name = input(f"Enter a name for the {debt_type}: ")
+            debt_date_str = input("Enter the date of the debt (YYYY-MM-DD): ")
+            debt_date = datetime.strptime(debt_date_str, "%Y-%m-%d").date()
+
+            # Date validation check
+            if debt_date > datetime.now().date():
+                print("Error: Cannot record debt for a future date.")
+                continue
+
+            # Capture debt details including date
+            debt_details = {"type": debt_type, "amount": debt_amount, "name": debt_name, "date": debt_date}
+            self.user_data[username].setdefault("debts", []).append(debt_details)
+
+            self.save_user_data()
+            print(f"Debt recorded successfully! Total debt: £{self.calculate_total_debt(username):.2f}")
+
+            # Ask the user if they want to add another debt
+            add_another = input("Do you want to add another debt? (yes/no): ")
+            if add_another.lower() != 'yes':
+                break
+        except ValueError as e:
+            print(f"Error: {e}. Please enter a valid positive number.")
 
   def calculate_recommendation(self, username, selected_goal):
     """

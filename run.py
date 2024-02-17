@@ -209,7 +209,53 @@ class PennyProvisions:
       '18': 'Operational costs',
       '19': 'Tax',
       '20': 'Other'
-  }  
+  }
+
+  def record_income(self, username, selected_goal):
+    """
+    Records inputted income data for the user, ensuring a valid amount is entered.
+    Records income input date for incorporation into Google Sheets API.
+    Updates current savings based on inputs.
+    """
+    user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
+
+    while True:
+        print("Income Options:")
+        for key, value in self.INCOME_OPTIONS.items():
+            print(f"{key}. {value}")
+
+        choice = input("Enter the number corresponding to the income source (or type 'done' to finish): ")
+
+        if choice.lower() == 'done':
+            break
+
+        if choice in self.INCOME_OPTIONS:
+            income_type = self.INCOME_OPTIONS[choice]
+            try:
+                income_amount = self.get_valid_amount(f"Enter the amount for {income_type}: ")
+                income_date_str = input("Enter the date of income (YYYY-MM-DD): ")
+                income_date = datetime.strptime(income_date_str, "%Y-%m-%d").date()
+
+                # Date validation check
+                if income_date > datetime.now().date():
+                    print("Error: Cannot record income for a future date.")
+                    continue
+
+                # Update savings for the selected goal
+                self.user_data[username]["current_savings"] += income_amount
+                self.user_data[username]["savings_goals"][selected_goal]["current_savings"] += income_amount
+
+                # Capture income details including date and associated savings goal
+                income_details = {"type": income_type, "amount": income_amount, "date": income_date,
+                                  "goal": selected_goal}
+                self.user_data[username]["incomes"].append(income_details)
+
+                self.save_user_data()
+                print(f"Income recorded successfully! Current savings: {user_currency[0]}{self.user_data[username]['current_savings']:.2f}")
+            except ValueError as e:
+                print(f"Error: {e}. Please enter a valid positive number.")
+        else:
+            print("Invalid choice. Please enter a number from the options.") 
 
   def main(self):
     """

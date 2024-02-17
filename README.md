@@ -170,13 +170,13 @@ Below is a table showing various actions performed on the website including the 
 
 * Upon testing my program I established that I could add a past dated savings goal. I resolved this by adding the following code:
 
+#Check if the target date is in the past
 try:
         target_date = datetime.strptime(target_date_str, "%Y-%m-%d").date()
     except ValueError:
         print("Invalid date format. Please use YYYY-MM-DD format.")
         return
 
-    # Check if the target date is in the past
     if target_date < datetime.now().date():
         print("Target date cannot be in the past.")
         return

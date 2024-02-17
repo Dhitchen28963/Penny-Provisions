@@ -120,14 +120,14 @@ class PennyProvisions:
         else:
             print("Invalid choice. Please enter a valid number from the options.")
 
-    # Initialize incomes and expenditures lists in JSON
+    # Initialize incomes and expenses lists in JSON
     self.user_data[username] = {
         "password": password,
         "savings_target": 0,
         "current_savings": 0,
         "expenses": [],
         "incomes": [],
-        "expenditures": [],
+        "expenses": [],
         "currency": selected_currency,
         "debts": [],
         "savings_goals": {}
@@ -188,7 +188,7 @@ class PennyProvisions:
       '17': 'Other',
   }
 
-  EXPENDITURE_OPTIONS = {
+  EXPENSE_OPTIONS = {
       '1': 'Rent payments',
       '2': 'Mortgage payments',
       '3': 'Insurance premiums',
@@ -317,48 +317,48 @@ class PennyProvisions:
         else:
             print("Invalid choice. Please enter a number from the options.")
 
-  def record_expenditure(self, username):
+  def record_expense(self, username):
     """
-    Records inputted expenditure data for the user, ensuring a valid amount is entered.
-    Records expenditure input date for tracking purposes.
-    Updates expenditure details based on inputs.
+    Records inputted expense data for the user, ensuring a valid amount is entered.
+    Records expense input date for tracking purposes.
+    Updates expense details based on inputs.
     """
     while True:
         print("\nEnter 'done' when finished.")
-        print("\nSelect the type of expenditure:")
-        for key, value in self.EXPENDITURE_OPTIONS.items():
+        print("\nSelect the type of expense:")
+        for key, value in self.EXPENSE_OPTIONS.items():
             print(f"{key}. {value}")
 
-        expenditure_choice = input("Enter the number corresponding to the type of expenditure:\n")
+        expense_choice = input("Enter the number corresponding to the type of expense:\n")
 
-        if expenditure_choice == 'done':
+        if expense_choice == 'done':
             break
 
-        if expenditure_choice in self.EXPENDITURE_OPTIONS:
-            expenditure_type = self.EXPENDITURE_OPTIONS[expenditure_choice]
+        if expense_choice in self.EXPENSE_OPTIONS:
+            expense_type = self.EXPENSE_OPTIONS[expense_choice]
 
             try:
-                expenditure_amount = self.get_valid_amount(f"Enter the amount for {expenditure_type}: ")
+                expense_amount = self.get_valid_amount(f"Enter the amount for {expense_type}: ")
 
-                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD):\n")
-                expenditure_date = datetime.strptime(expenditure_date_str, "%Y-%m-%d").date()
+                expense_date_str = input("Enter the date of the expense (YYYY-MM-DD):\n")
+                expense_date = datetime.strptime(expense_date_str, "%Y-%m-%d").date()
 
                 # Date validation check
-                if expenditure_date > datetime.now().date():
-                    print("Error: Cannot record expenditure for a future date.")
+                if expense_date > datetime.now().date():
+                    print("Error: Cannot record expense for a future date.")
                     continue
 
-                # Capture expenditure details including date
-                expenditure_details = {"type": expenditure_type, "amount": expenditure_amount,
-                                       "date": expenditure_date}
-                self.user_data[username].setdefault("expenditures", []).append(expenditure_details)
+                # Capture expense details including date
+                expense_details = {"type": expense_type, "amount": expense_amount,
+                                       "date": expense_date}
+                self.user_data[username].setdefault("expenses", []).append(expense_details)
 
                 self.save_user_data()
                 print(
-                    f"Expenditure recorded successfully! Total expenditure: £{self.calculate_total_expenditure(username):.2f}")
+                    f"expense recorded successfully! Total expense: £{self.calculate_total_expenses(username):.2f}")
 
-                # Ask the user if they want to add another expenditure
-                add_another = input("Do you want to add another expenditure? (yes/no):\n")
+                # Ask the user if they want to add another expense
+                add_another = input("Do you want to add another expense? (yes/no):\n")
                 if add_another.lower() != 'yes':
                     break
             except ValueError as e:
@@ -366,10 +366,10 @@ class PennyProvisions:
         else:
             print("Invalid choice. Please enter a valid number from the options.")
 
-  def add_debt_expenditure_to_savingsgoal(self, username):
+  def add_debt_expense_to_savingsgoal(self, username):
     """
     Records inputted debt data for the user, ensuring a valid amount is entered.
-    Records expenditure to savings goal.
+    Records expense to savings goal.
     This could be a debt that is not added to the manage debts.
     Updates debt details based on inputs.
     """
@@ -404,12 +404,12 @@ class PennyProvisions:
         except ValueError as e:
             print(f"Error: {e}. Please enter a valid positive number.")
 
-  def calculate_total_expenditure(self, username):
+  def calculate_total_expense(self, username):
     """
-    Calculates and returns the total expenditure for the user.
+    Calculates and returns the total expense for the user.
     """
-    total_expenditure = sum(expenditure["amount"] for expenditure in self.user_data[username].get("expenditures", []))
-    return total_expenditure
+    total_expense = sum(expense["amount"] for expense in self.user_data[username].get("expenses", []))
+    return total_expense
 
   def calculate_recommendation(self, username, selected_goal):
     """
@@ -480,10 +480,10 @@ class PennyProvisions:
     Analyze monthly activity to find the month with the most expenses and savings.
     """
     incomes = self.user_data[username].get("incomes", [])
-    expenditures = self.user_data[username].get("expenditures", [])
+    expenses = self.user_data[username].get("expenses", [])
 
-    # Combine incomes and expenditures
-    all_activities = incomes + expenditures
+    # Combine incomes and expenses
+    all_activities = incomes + expenses
 
     # Create a dictionary to store monthly totals
     monthly_totals = {}
@@ -499,20 +499,20 @@ class PennyProvisions:
 
         # Initialize or update the monthly total
         if month_year not in monthly_totals:
-            monthly_totals[month_year] = {"income": 0, "expenditure": 0}
+            monthly_totals[month_year] = {"income": 0, "expense": 0}
 
         if activity in incomes:
             monthly_totals[month_year]["income"] += activity["amount"]
         else:
-            monthly_totals[month_year]["expenditure"] += activity["amount"]
+            monthly_totals[month_year]["expense"] += activity["amount"]
 
     if not monthly_totals:
         print("No monthly activity found.")
         return
 
-    # Find the month with the highest income and expenditure
+    # Find the month with the highest income and expense
     max_income_month = max(monthly_totals, key=lambda x: monthly_totals[x]["income"], default=None)
-    max_expenditure_month = max(monthly_totals, key=lambda x: monthly_totals[x]["expenditure"], default=None)
+    max_expense_month = max(monthly_totals, key=lambda x: monthly_totals[x]["expense"], default=None)
 
     print("\nMonthly Activity Analysis:")
     if max_income_month:
@@ -520,10 +520,10 @@ class PennyProvisions:
     else:
         print("No income recorded.")
 
-    if max_expenditure_month:
-        print(f"Month with the highest expenditure: {max_expenditure_month} - £{monthly_totals[max_expenditure_month]['expenditure']:.2f}")
+    if max_expense_month:
+        print(f"Month with the highest expense: {max_expense_month} - £{monthly_totals[max_expense_month]['expense']:.2f}")
     else:
-        print("No expenditure recorded.")
+        print("No expense recorded.")
 
   def manage_debts(self, username):
     """
@@ -537,7 +537,7 @@ class PennyProvisions:
         print(f"\nManage Debts Menu ({user_currency_symbol}):")
         print("1. Add Debt")
         print("2. View Debts")
-        print("3. Add Expenditure to Debt")
+        print("3. Add expense to Debt")
         print("4. Go Back")
 
         option = input("Enter your choice (1-4):\n")
@@ -626,7 +626,7 @@ class PennyProvisions:
     Records an repayment towards a specific debt.
     """
     while True:
-        print("\nSelect a debt to add an expenditure:")
+        print("\nSelect a debt to add an expense:")
         debts = self.user_data[username].get("debts", [])
         if not debts:
           print("No debts found. Please add a debt first.")
@@ -645,22 +645,22 @@ class PennyProvisions:
             if 1 <= choice_index <= len(debts):
                 selected_debt = debts[choice_index - 1]
                 debt_name = selected_debt['name']
-                expenditure_amount = self.get_valid_amount(f"Enter the amount for the expenditure on {debt_name}: ")
+                expense_amount = self.get_valid_amount(f"Enter the amount for the expense on {debt_name}: ")
 
-                # Record the expenditure details including the date
-                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD):\n")
-                expenditure_date = datetime.strptime(expenditure_date_str, "%Y-%m-%d").date()
+                # Record the expense details including the date
+                expense_date_str = input("Enter the date of the expense (YYYY-MM-DD):\n")
+                expense_date = datetime.strptime(expense_date_str, "%Y-%m-%d").date()
 
                 # Add a date validation check
-                if expenditure_date > datetime.now().date():
-                    print("Error: Cannot record expenditure for a future date.")
+                if expense_date > datetime.now().date():
+                    print("Error: Cannot record expense for a future date.")
                     continue
 
-                # Update the debt details with the expenditure
-                selected_debt["payments"].append({"amount": expenditure_amount, "date": expenditure_date})
+                # Update the debt details with the expense
+                selected_debt["payments"].append({"amount": expense_amount, "date": expense_date})
 
                 self.save_user_data()
-                print(f"Expenditure recorded successfully! Remaining debt on {debt_name}: £{self.calculate_remaining_balance(selected_debt):.2f}")
+                print(f"expense recorded successfully! Remaining debt on {debt_name}: £{self.calculate_remaining_balance(selected_debt):.2f}")
             else:
                 print("Invalid choice. Please enter a number within the given range.")
         except ValueError:
@@ -715,7 +715,7 @@ class PennyProvisions:
                     print("1. Add Savings Goal")
                     print("2. Select Savings Goal")
                     print("3. Record Income")
-                    print("4. Record Expenditure")
+                    print("4. Record Expense")
                     print("5. View Recommendations")
                     print("6. View Current Savings")
                     print("7. Manage Debts")  # Added option
@@ -742,7 +742,7 @@ class PennyProvisions:
                             print("Please select a savings goal first.")
                     elif option == "4":
                         if selected_goal:
-                            self.record_expenditure(username)
+                            self.record_expense(username)
                         else:
                             print("Please select a savings goal first.")
                     elif option == "5":

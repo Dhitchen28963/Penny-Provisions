@@ -163,6 +163,7 @@ Below is a table showing various actions performed on the website including the 
 | Add Expense to Debt                      | User can record expenses against a specific debt.                  |  Pass  |
 | Go Back                                  | User can navigate back to previous screens.                        |  Pass  |
 | Input Future Dated Income/Expense        | Message is displayed to user to prevent future dated inputs        |  Pass  |
+| Input Past dated savings target          | Message is displayed to user to prevent past dated target dates    |  Pass  |
 | Display prompts                          | Prompts are displayed to ensure user friendly navigation           |  Pass  |
 
 ## Bugs

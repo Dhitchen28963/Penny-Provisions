@@ -430,6 +430,33 @@ class PennyProvisions:
 
       print("\nEnd of Savings Goals List.")
 
+  def manage_debts(self, username):
+    """
+    Allows the user to manage debts (add or view).
+    """
+    user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
+
+    while True:
+        user_currency_symbol = user_currency[1]  # Get the currency symbol
+        print(f"\nManage Debts Menu ({user_currency_symbol}):")
+        print("1. Add Debt")
+        print("2. View Debts")
+        print("3. Add Expenditure to Debt")
+        print("4. Go Back")
+
+        option = input("Enter your choice (1-4): ")
+
+        if option == "1":
+            self.add_debt(username)
+        elif option == "2":
+            self.view_all_debts(username)
+        elif option == "3":
+            self.add_repayment_to_debt(username)
+        elif option == "4":
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

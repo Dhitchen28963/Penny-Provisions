@@ -19,6 +19,8 @@
 <li>Bugs</li>
 <li>Fixed Bugs</li>
 <li>Deployment</li>
+<li>Technology's</li>
+<li>Other Resources</li>
 <li>Credits</li>
 </ol>
 
@@ -164,10 +166,10 @@ Below is a table showing various actions performed on the website including the 
 | Display prompts                          | Prompts are displayed to ensure user friendly navigation           |  Pass  |
 
 ## Bugs
-* Upon selecting the "Add Expense" and selected Debt in the expense options I was prompted to select one of the debts from my manage debts menu. To resolve this I added a separate function to allow users to add a non priority debt to a savings goal and for priority debts then can use the manage debts menu which contains additional options such as term (in months) and an interest rate.
+Upon selecting the "Add Expense" and selected Debt in the expense options I was prompted to select one of the debts from my manage debts menu. To resolve this I added a separate function to allow users to add a non priority debt to a savings goal and for priority debts then can use the manage debts menu which contains additional options such as term (in months) and an interest rate.
 
 ## Unfixed Bugs
-* No unfixed bugs.
+No unfixed bugs.
 
 ### Languages
 
@@ -189,7 +191,23 @@ The site was deployed to Heroku pages. The steps to deploy are as follows:
 
 The link can be found here - [Penny Provisions](https://penny-provisions-777f1206dc49.herokuapp.com/)
 
+## Technology's
+[ChatGPT 3.5](https://chat.openai.com/)
+For swiftly reviewing code to find discrepancies including spell checking and some trouble shooting.
+
+[Lucid Chart](https://lucid.app/documents#/documents?folder_id=home)
+Creating the flow chart to establish user journey in addition to flow and validation of information.
+
+[Youtube](https://www.youtube.com/watch?v=3NEzo3CfbPg)
+To further understand secure login system using Python.
+
+[Stack overflow](https://stackoverflow.com/)
+To expand on information not outlined in course content.
+
+## Other Resources
+Books: Coding Academy 2022 (Digital Edition)
+
 ## Credits
 
 **Content**
-* The code relating to user login and user account creation was derived from Youtube videos from Digital Fox, Stack Overflow and Chat.openai.com for suggestions.
+The code relating to user login and user account creation was derived from Youtube videos from Digital Fox, Stack Overflow and Chat.openai.com for suggestions.

@@ -432,6 +432,7 @@ class PennyProvisions:
 
   def manage_debts(self, username):
     """
+    Manage Debts Menu.
     Allows the user to manage debts (add or view).
     """
     user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
@@ -456,6 +457,42 @@ class PennyProvisions:
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
+
+  def add_debt(self, username):
+    """
+    Allows the user to add a new debt.
+    """
+    print("Enter 'done' when finished.")
+    while True:
+        try:
+            debt_amount = self.get_valid_amount("Enter the amount for the debt: ")
+            debt_name = input("Enter a name for the debt: ")
+            debt_type = input("Enter the type of debt: ")
+
+            # Term is when the debt needs to be paid off by
+            debt_term = int(input("Enter the term of the debt (in months): "))
+            interest_rate = float(input("Enter the interest rate on the debt (as a percentage): "))
+
+            # Capture debt details including term and interest
+            debt_details = {
+                "amount": debt_amount,
+                "term": debt_term,
+                "name": debt_name,
+                "type": debt_type,
+                "interest_rate": interest_rate,
+                "payments": []  # List to store payment details
+            }
+            self.user_data[username].setdefault("debts", []).append(debt_details)
+
+            self.save_user_data()
+            print(f"Debt recorded successfully! Total debt: £{self.calculate_total_debt(username):.2f}")
+
+            # Ask the user if they want to add another debt
+            add_another = input("Do you want to add another debt? (yes/no): ")
+            if add_another.lower() != 'yes':
+                  break
+        except ValueError as e:
+            print(f"Error: {e}. Please enter valid information.")
 
   def main(self):
     """

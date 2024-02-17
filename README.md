@@ -8,6 +8,7 @@
 <ol>
 <li>User Experience
     <ul>
+        <li>Process Flow Chart<li>
         <li>Strategy Plane</li>
         <li>Scope Plane</li>
         <li>Structure & Skeleton Plane</li>
@@ -22,6 +23,9 @@
 </ol>
 
 ## User Experience
+
+### Process Flow Chart
+![Screenshot from lighthouse report using developer tools for mobile version of index.html](assets/images/penny-provisions-flowchart.jpeg)
 
 ### 5trategy Plane
 

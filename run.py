@@ -537,7 +537,7 @@ class PennyProvisions:
         print(f"\nManage Debts Menu ({user_currency_symbol}):")
         print("1. Add Debt")
         print("2. View Debts")
-        print("3. Add expense to Debt")
+        print("3. Add Expense To Debt")
         print("4. Go Back")
 
         option = input("Enter your choice (1-4):\n")

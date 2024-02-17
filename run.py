@@ -82,14 +82,14 @@ class PennyProvisions:
         return None
 
     while True:
-        username = input("Enter your username: ")
+        username = input("Enter your username:\n")
         password = getpass.getpass("Enter your password: ")
 
         if username in self.user_data and self.user_data[username]["password"] == password:
             return username
         else:
             print("Invalid credentials. Hit enter to try again or enter 'cancel' to go back to the main menu.")
-            choice = input("Enter 'cancel' to return to the main menu: ")
+            choice = input("Enter 'cancel' to return to the main menu:\n")
             if choice.lower() == 'cancel':
                 return None
     
@@ -98,7 +98,7 @@ class PennyProvisions:
     Set up a new user account by creating a username and password.
     Once the account is created, the user will need to log in using the details provided.
     """
-    username = input("Create a username: ")
+    username = input("Create a username:\n")
     password = getpass.getpass("Create a password: ")
 
     if username in self.user_data:
@@ -112,7 +112,7 @@ class PennyProvisions:
 
     selected_currency = None
     while not selected_currency:
-        currency_choice = input("Enter the number corresponding to your preferred currency: ")
+        currency_choice = input("Enter the number corresponding to your preferred currency:\n")
 
         if currency_choice in self.CURRENCY_OPTIONS:
             selected_currency = self.CURRENCY_OPTIONS[currency_choice]
@@ -216,14 +216,14 @@ class PennyProvisions:
     Adds a new savings goal for the user.
     """
     print("Enter 'cancel' to cancel.")
-    goal_name = input("Enter the name of your savings goal: ")
+    goal_name = input("Enter the name of your savings goal:\n")
 
     if goal_name.lower() == 'cancel':
         print("Savings goal creation canceled.")
         return
 
-    target_amount = float(input("Enter your savings target amount: "))
-    target_date_str = input("Enter the date you wish to save the required money by (YYYY-MM-DD): ")
+    target_amount = float(input("Enter your savings target amount:\n"))
+    target_date_str = input("Enter the date you wish to save the required money by (YYYY-MM-DD):\n")
     target_date = datetime.strptime(target_date_str, "%Y-%m-%d").date()
 
     # Check if the key is present in the user_data, if not, create it
@@ -254,7 +254,7 @@ class PennyProvisions:
     for i, (goal_name, goal_info) in enumerate(savings_goals.items(), start=1):
         print(f"{i}. {goal_name} - Target Amount: {user_currency[0]}{goal_info['target_amount']:.2f}")
 
-    choice = input("Enter the number corresponding to the savings goal (or type 'cancel' to go back): ")
+    choice = input("Enter the number corresponding to the savings goal (or type 'cancel' to go back):\n")
 
     if choice.lower() == 'cancel':
         return None
@@ -284,7 +284,7 @@ class PennyProvisions:
         for key, value in self.INCOME_OPTIONS.items():
             print(f"{key}. {value}")
 
-        choice = input("Enter the number corresponding to the income source (or type 'done' to finish): ")
+        choice = input("Enter the number corresponding to the income source (or type 'done' to finish):\n")
 
         if choice.lower() == 'done':
             break
@@ -293,7 +293,7 @@ class PennyProvisions:
             income_type = self.INCOME_OPTIONS[choice]
             try:
                 income_amount = self.get_valid_amount(f"Enter the amount for {income_type}: ")
-                income_date_str = input("Enter the date of income (YYYY-MM-DD): ")
+                income_date_str = input("Enter the date of income (YYYY-MM-DD):\n")
                 income_date = datetime.strptime(income_date_str, "%Y-%m-%d").date()
 
                 # Date validation check
@@ -329,7 +329,7 @@ class PennyProvisions:
         for key, value in self.EXPENDITURE_OPTIONS.items():
             print(f"{key}. {value}")
 
-        expenditure_choice = input("Enter the number corresponding to the type of expenditure: ")
+        expenditure_choice = input("Enter the number corresponding to the type of expenditure:\n")
 
         if expenditure_choice == 'done':
             break
@@ -340,7 +340,7 @@ class PennyProvisions:
             try:
                 expenditure_amount = self.get_valid_amount(f"Enter the amount for {expenditure_type}: ")
 
-                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD): ")
+                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD):\n")
                 expenditure_date = datetime.strptime(expenditure_date_str, "%Y-%m-%d").date()
 
                 # Date validation check
@@ -358,7 +358,7 @@ class PennyProvisions:
                     f"Expenditure recorded successfully! Total expenditure: £{self.calculate_total_expenditure(username):.2f}")
 
                 # Ask the user if they want to add another expenditure
-                add_another = input("Do you want to add another expenditure? (yes/no): ")
+                add_another = input("Do you want to add another expenditure? (yes/no):\n")
                 if add_another.lower() != 'yes':
                     break
             except ValueError as e:
@@ -375,14 +375,14 @@ class PennyProvisions:
     """
     while True:
         print("Enter 'done' when finished.")
-        debt_type = input("Enter the type of debt: ")
+        debt_type = input("Enter the type of debt:\n")
         if debt_type.lower() == 'done':
             break
 
         try:
             debt_amount = self.get_valid_amount(f"Enter the amount for {debt_type}: ")
-            debt_name = input(f"Enter a name for the {debt_type}: ")
-            debt_date_str = input("Enter the date of the debt (YYYY-MM-DD): ")
+            debt_name = input(f"Enter a name for the {debt_type}:\n")
+            debt_date_str = input("Enter the date of the debt (YYYY-MM-DD):\n")
             debt_date = datetime.strptime(debt_date_str, "%Y-%m-%d").date()
 
             # Date validation check
@@ -398,7 +398,7 @@ class PennyProvisions:
             print(f"Debt recorded successfully! Total debt: £{self.calculate_total_debt(username):.2f}")
 
             # Ask the user if they want to add another debt
-            add_another = input("Do you want to add another debt? (yes/no): ")
+            add_another = input("Do you want to add another debt? (yes/no):\n")
             if add_another.lower() != 'yes':
                 break
         except ValueError as e:
@@ -540,7 +540,7 @@ class PennyProvisions:
         print("3. Add Expenditure to Debt")
         print("4. Go Back")
 
-        option = input("Enter your choice (1-4): ")
+        option = input("Enter your choice (1-4):\n")
 
         if option == "1":
             self.add_debt(username)
@@ -561,12 +561,12 @@ class PennyProvisions:
     while True:
         try:
             debt_amount = self.get_valid_amount("Enter the amount for the debt: ")
-            debt_name = input("Enter a name for the debt: ")
-            debt_type = input("Enter the type of debt: ")
+            debt_name = input("Enter a name for the debt:\n")
+            debt_type = input("Enter the type of debt:\n")
 
             # Term is when the debt needs to be paid off by
-            debt_term = int(input("Enter the term of the debt (in months): "))
-            interest_rate = float(input("Enter the interest rate on the debt (as a percentage): "))
+            debt_term = int(input("Enter the term of the debt (in months):\n"))
+            interest_rate = float(input("Enter the interest rate on the debt (as a percentage):\n"))
 
             # Capture debt details including term and interest
             debt_details = {
@@ -583,7 +583,7 @@ class PennyProvisions:
             print(f"Debt recorded successfully! Total debt: £{self.calculate_total_debt(username):.2f}")
 
             # Ask the user if they want to add another debt
-            add_another = input("Do you want to add another debt? (yes/no): ")
+            add_another = input("Do you want to add another debt? (yes/no):\n")
             if add_another.lower() != 'yes':
                   break
         except ValueError as e:
@@ -635,7 +635,7 @@ class PennyProvisions:
         for i, debt in enumerate(debts, start=1):
             print(f"{i}. {debt['name']} - Type: {debt['type']} - Remaining Term: {debt['term']} months")
 
-        choice = input("Enter the number corresponding to the debt (or type 'cancel' to go back): ")
+        choice = input("Enter the number corresponding to the debt (or type 'cancel' to go back):\n")
 
         if choice.lower() == 'cancel':
             return
@@ -648,7 +648,7 @@ class PennyProvisions:
                 expenditure_amount = self.get_valid_amount(f"Enter the amount for the expenditure on {debt_name}: ")
 
                 # Record the expenditure details including the date
-                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD): ")
+                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD):\n")
                 expenditure_date = datetime.strptime(expenditure_date_str, "%Y-%m-%d").date()
 
                 # Add a date validation check
@@ -698,7 +698,7 @@ class PennyProvisions:
         print("2. Set Up Account")
         print("3. Exit")
 
-        choice = input("Enter your choice (1-3): ")
+        choice = input("Enter your choice (1-3):\n")
 
         if choice.lower() == 'cancel':
             print("Operation canceled.")
@@ -723,7 +723,7 @@ class PennyProvisions:
                     print("9. Analyze Monthly Activity")
                     print("10. Log Out")
 
-                    option = input("Enter your choice (1-10): ")
+                    option = input("Enter your choice (1-10):\n")
 
                     if option.lower() == 'cancel':
                         print("Operation canceled.")
@@ -759,7 +759,7 @@ class PennyProvisions:
                     elif option == "9":
                         self.analyze_monthly_activity(username)
                     elif option == "10":
-                        confirm_logout = input("Are you sure you want to log out? (yes/no): ")
+                        confirm_logout = input("Are you sure you want to log out? (yes/no):\n")
                         if confirm_logout.lower() == 'yes':
                             break
                         elif confirm_logout.lower() == 'no':

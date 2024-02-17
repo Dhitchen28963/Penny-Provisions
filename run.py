@@ -404,6 +404,13 @@ class PennyProvisions:
         except ValueError as e:
             print(f"Error: {e}. Please enter a valid positive number.")
 
+  def calculate_total_expenditure(self, username):
+    """
+    Calculates and returns the total expenditure for the user.
+    """
+    total_expenditure = sum(expenditure["amount"] for expenditure in self.user_data[username].get("expenditures", []))
+    return total_expenditure
+
   def calculate_recommendation(self, username, selected_goal):
     """
     Calculates and displays savings recommendations based on the users selected savings goal.

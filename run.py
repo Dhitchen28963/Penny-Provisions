@@ -255,7 +255,56 @@ class PennyProvisions:
             except ValueError as e:
                 print(f"Error: {e}. Please enter a valid positive number.")
         else:
-            print("Invalid choice. Please enter a number from the options.") 
+            print("Invalid choice. Please enter a number from the options.")
+
+  def record_expenditure(self, username):
+    """
+    Records inputted expenditure data for the user, ensuring a valid amount is entered.
+    Records expenditure input date for tracking purposes.
+    Updates expenditure details based on inputs.
+    """
+    while True:
+        print("\nEnter 'done' when finished.")
+        print("\nSelect the type of expenditure:")
+        for key, value in self.EXPENDITURE_OPTIONS.items():
+            print(f"{key}. {value}")
+
+        expenditure_choice = input("Enter the number corresponding to the type of expenditure: ")
+
+        if expenditure_choice == 'done':
+            break
+
+        if expenditure_choice in self.EXPENDITURE_OPTIONS:
+            expenditure_type = self.EXPENDITURE_OPTIONS[expenditure_choice]
+
+            try:
+                expenditure_amount = self.get_valid_amount(f"Enter the amount for {expenditure_type}: ")
+
+                expenditure_date_str = input("Enter the date of the expenditure (YYYY-MM-DD): ")
+                expenditure_date = datetime.strptime(expenditure_date_str, "%Y-%m-%d").date()
+
+                # Date validation check
+                if expenditure_date > datetime.now().date():
+                    print("Error: Cannot record expenditure for a future date.")
+                    continue
+
+                # Capture expenditure details including date
+                expenditure_details = {"type": expenditure_type, "amount": expenditure_amount,
+                                       "date": expenditure_date}
+                self.user_data[username].setdefault("expenditures", []).append(expenditure_details)
+
+                self.save_user_data()
+                print(
+                    f"Expenditure recorded successfully! Total expenditure: £{self.calculate_total_expenditure(username):.2f}")
+
+                # Ask the user if they want to add another expenditure
+                add_another = input("Do you want to add another expenditure? (yes/no): ")
+                if add_another.lower() != 'yes':
+                    break
+            except ValueError as e:
+                print(f"Error: {e}. Please enter a valid positive number.")
+        else:
+            print("Invalid choice. Please enter a valid number from the options.")
 
   def main(self):
     """

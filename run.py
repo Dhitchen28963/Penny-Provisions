@@ -583,6 +583,14 @@ class PennyProvisions:
 
       return total_debt
 
+  def calculate_remaining_balance(self, debt):
+    """
+    Calculates the remaining balance on a debt.
+    """
+    amount_paid = sum(payment["amount"] for payment in debt.get("payments", []))
+    remaining_balance = debt["amount"] + (debt["amount"] * debt["interest_rate"] / 100) - amount_paid
+    return max(remaining_balance, 0)
+
   def main(self):
     """
     Main function to run Penny Provisions program.

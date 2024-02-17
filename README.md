@@ -166,7 +166,17 @@ Below is a table showing various actions performed on the website including the 
 | Display prompts                          | Prompts are displayed to ensure user friendly navigation           |  Pass  |
 
 ## Bugs
-* Upon selecting the "Add Expense" and selected Debt in the expense options I was prompted to select one of the debts from my manage debts menu. To resolve this I added a separate function to allow users to add a non priority debt to a savings goal and for priority debts then can use the manage debts menu which contains additional options such as term (in months) and an interest rate.
+* Upon selecting the "Add Expense" option and selecting Debt from the list of expense options I was prompted to select one of the debts from my manage debts menu. To resolve this I added a separate function to allow users to add a non priority debt to a savings goal and for priority debts they can use the manage debts menu which contains additional options such as term (in months) and an interest rate. The program now contains two separate functions relating to repayments of debts:
+
+This function allows users to add a non priority debt which will be incoporated into the savings goal without the interest rate or term via the Penny Provisions Menu:
+```python
+def add_debt_expense_to_savingsgoal(self, username):
+```
+
+This function allows users to add a priority debt which will be incoporated into the debt including the interest rate and term via the Manage Debts Menu:
+```python
+def add_repayment_to_debt(self, username):
+```
 
 * Upon testing my program I established that I could add a past dated savings goal. I resolved this by adding the following code:
 

@@ -366,6 +366,42 @@ class PennyProvisions:
         else:
             print("Invalid choice. Please enter a valid number from the options.")
 
+  def calculate_recommendation(self, username, selected_goal):
+    """
+    Calculates and displays savings recommendations based on the users selected savings goal.
+    This function collates information about the selected savings goal including:
+    Target amount, Current savings, Expenses, Incomes and target date.
+    The recommended weekly, monthly and annual savings amount is displayed.
+    If the savings target is reached then a message will be displayed to confirm this.
+    """
+    user_currency = self.user_data[username].get("currency", ('GBP', 'British Pound Sterling'))
+    goal_info = self.user_data[username]["savings_goals"][selected_goal]
+    target_amount = goal_info["target_amount"]
+    current_savings = goal_info["current_savings"]
+    target_date = goal_info.get("target_date", None)
+
+    remaining_days = None  # Initialize remaining_days here
+
+    if current_savings >= target_amount:
+        print(f"\nCongratulations! Your savings goal '{selected_goal}' has already been achieved.")
+    elif target_date:
+        if isinstance(target_date, date):
+            remaining_days = (target_date - datetime.now().date()).days
+        elif isinstance(target_date, str):
+            target_date = datetime.strptime(target_date, "%Y-%m-%d").date()
+            remaining_days = (target_date - datetime.now().date()).days
+
+    if target_amount > 0 and remaining_days:
+        weekly_recommendation = (target_amount - current_savings) / (remaining_days / 7)
+        monthly_recommendation = (target_amount - current_savings) / (remaining_days / 30)
+        annually_recommendation = (target_amount - current_savings) / (remaining_days / 365)
+
+        user_currency_symbol = user_currency[1]  # Get the currency symbol
+        print(f"\nRecommendations ({user_currency_symbol}):")
+        print(f" - Weekly: Save {user_currency[0]}{max(weekly_recommendation, 0):.2f} per week.")
+        print(f" - Monthly: Save {user_currency[0]}{max(monthly_recommendation, 0):.2f} per month.")
+        print(f" - Annually: Save {user_currency[0]}{max(annually_recommendation, 0):.2f} per year.")
+
   def main(self):
     """
     Main function to run Penny Provisions program.

@@ -17,7 +17,8 @@
     </li>
 <li>Testing</li>
 <li>Bugs</li>
-<li>Fixed Bugs</li>
+<li>Unfixed Bugs</li>
+<li>Validation</li>
 <li>Deployment</li>
 <li>Technology's</li>
 <li>Other Resources</li>
@@ -27,7 +28,7 @@
 ## User Experience
 
 ### Process Flow Chart
-![Screenshot from lighthouse report using developer tools for mobile version of index.html](assets/images/penny-provisions-flowchart.jpeg)
+![Lucid Chart flow chart illustrating Penny Provisions process flow](assets/images/penny-provisions-flowchart.jpeg)
 
 ### 5trategy Plane
 
@@ -197,6 +198,10 @@ if target_date < datetime.now().date():
 ## Unfixed Bugs
 No unfixed bugs.
 
+## Validation
+
+![Screenshot of Python Validation (PEP8)](assets/images/python-validation.png)
+
 ### Languages
 
 **PYTHON**
@@ -229,6 +234,9 @@ To further understand secure login system using Python.
 
 [Stack overflow](https://stackoverflow.com/)
 To expand on information not outlined in course content.
+
+[PEP8](https://pep8ci.herokuapp.com/)
+To enable validation of Python code and ensure convention was maintained.
 
 ## Other Resources
 Books: Coding Academy 2022 (Digital Edition)

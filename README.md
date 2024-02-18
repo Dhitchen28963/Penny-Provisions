@@ -30,7 +30,7 @@
 ### Process Flow Chart
 ![Lucid Chart flow chart illustrating Penny Provisions process flow](assets/images/penny-provisions-flowchart.jpeg)
 
-### 5trategy Plane
+### Strategy Plane
 
 ### User Goals:
 - **Financial Management:** Users aim to efficiently manage their finances, including savings goals and debts.

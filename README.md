@@ -77,60 +77,105 @@
    - Username and password required.
    - Password input hidden for additional security.
 
+![Login - Main Menu](assets/images/add-savings-goal.png)
+![Invalid Login Attempt - Main Menu](assets/images/invalid-login-attempt.png)
+![Successful Login - Main Menu](assets/images/logged-in-penny-provisions-menu.png)
+
 2. **Set Up Account:**
    - Allows the user to create a new Penny Provisions account.
    - User selects desired currency during account setup.
    - Upon account creation the user will be prompted to log in.
    - Option to exit the setup process.
 
+![Set Up Account - Main Menu](assets/images/user-account-creation.png)
+![Currency Selection - Main Menu](assets/images/currency-selection.png)
+
 3. **Exit:**
    - Option to exit the Penny Provisions application.
+
+![Exit Penny Provisions and goodbye message - Main Menu](assets/images/exit-message.png)
 
 #### Penny Provisions Menu (10 options available to the user):
 1. **Add Savings Goal:**
    - Allows the user to add a new savings goal.
    - Input required for goal name, target amount, and target date.
 
+![Add Savings Goal](assets/images/add-savings-goal.png)
+![Savings Goal Prompt](assets/images/savings-goal-prompt.png)
+![Valid Savings goal](assets/images/savings-goal-successfull-input.png)
+![Invalid Savings Goal Selection](assets/images/invalid-savings-goal-selection.png)
+![Invalid Savings Goal Input](assets/images/invalid-savings-goal-input.png)
+
 2. **Select Savings Goal:**
    - Option to select and view details of an existing savings goal(s).
+
+![Valid Savings Goal](assets/images/valid-savings-goal-selected.png)
+![Invalid Savings Goal](assets/images/invalid-savings-goal-selection.png)
 
 3. **Record Income:**
    - Allows the user to record incomes and categorize them.
 
+![Valid Record Income](assets/images/valid-add-income.png)
+![Invalid Income Record Attempt](assets/images/invalid-income-attempt.png)
+
 4. **Record Expense:**
    - Allows the user to record expenses and categorize them.
+
+![Valid Record Expense](assets/images/valid-expense-added.png)
+![Invalid Expense Record Attempt](assets/images/invalid-expense-attempt.png)
 
 5. **View Recommendations:**
    - Provides weekly, monthly, and annual recommendations based on income, expenses, and savings goals.
 
+![View Recommendation](assets/images/view-recommendations.png)
+
 6. **View Current Savings:**
    - Displays the current balance and progress of all savings goals.
+
+![View Current Savings](assets/images/view-current-savings.png)
 
 7. **Manage Debts:**
    - Navigates the user to the Manage Debt Menu for debt-related actions.
 
+![Manage Debts Menu](assets/images/manage-debt-menu.png)
+
 8. **View All Savings Goals:**
    - Lists all existing savings goals for the user to view.
+
+![View All Savings Goals](assets/images/view-all-savings-goals.png)
 
 9. **Analyze Monthly Activity:**
    - Provides insights into the month with the highest recorded income and expenses.
 
+![Analyze Monthly Activity](assets/images/analyze-monthly-activity.png)
+
 10. **Log Out:**
     - Logs the user out of the Penny Provisions account.
+
+![Log Out](assets/images/log-out-prompt.png)
 
 #### Manage Debt Menu (4 options available to the user):
 1. **Add Debt:**
    - Allows the user to add a new debt entry.
    - Input required for debt name, amount, type and interest rate.
 
+![Valid Debt Added](assets/images/add-debt.png)
+
 2. **View Debts:**
    - Lists all existing debts for the user to view.
+
+![View Debts](assets/images/view-all-debts.png)
 
 3. **Add Expense to Debt:**
    - Enables the user to add an expense directly to a specific debt entry.
 
+![Valid Payment To Debt](assets/images/valid-debt-payment-inputted.png)
+![Invalid Payment To Debt](assets/images/invalid-debt-expense-inputted.png)
+
 4. **Go Back:**
    - Takes the user back to the Penny Provisions Menu.
+
+![Go Back](assets/images/go-back-and-log-out.png)
 
 ### Surface Plane
 - Employs clear and readable prompts for easy comprehension of text and prompts.

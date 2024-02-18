@@ -139,7 +139,7 @@
 
 ## Testing
 
-Below is a table showing various actions performed on the website including the expected/desired outcome with the result on the final column.
+Below is a table showing various actions performed on the program including the expected/desired outcome with the result on the final column.
 
 | Action                                   | Expected Result                                                    | Result |
 |------------------------------------------|--------------------------------------------------------------------|--------|
